@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/uss_demo.dir/src/main.cpp.o  -o uss_demo  /usr/lib/x86_64-linux-gnu/libpython3.8.so libuss.a /usr/lib/x86_64-linux-gnu/libpython3.8.so 

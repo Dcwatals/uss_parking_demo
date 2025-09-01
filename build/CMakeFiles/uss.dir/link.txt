@@ -1,0 +1,2 @@
+/usr/bin/ar qc libuss.a  CMakeFiles/uss.dir/src/USS.cpp.o
+/usr/bin/ranlib libuss.a

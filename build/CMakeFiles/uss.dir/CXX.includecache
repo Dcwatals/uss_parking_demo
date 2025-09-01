@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/USS.hpp
+vector
+-
+cstdint
+-
+cmath
+-
+
+/home/dcw/catkin_ws/uss_parking/src/USS.cpp
+USS.hpp
+/home/dcw/catkin_ws/uss_parking/src/USS.hpp
+algorithm
+-
+
