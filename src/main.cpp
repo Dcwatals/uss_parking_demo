@@ -9,6 +9,11 @@
 using namespace uss;
 namespace plt = matplotlibcpp;
 
+
+
+
+
+
 // A tiny demo with synthetic curb-side obstacles: two parked cars with a gap.
 int main() {
     Params params;
@@ -54,15 +59,7 @@ int main() {
         std::cout << "dis_y" <<dis_y[i]<<std::endl;
 
     }
-    // 输出模拟数据 (定位[x,y] 和 超声波距离)
-    // std::cout << "模拟数据 (时间t, x, y, 距离d):" << std::finall;
-    // for (size_t i = 0; i < times.size(); ++i) {
-    //     std::cout << "t=" << times[i] << ", x=" << xs[i] << ", y=" << ys[i] << ", d=" << distances[i] << std::finall;
-    // }
     
-    
-    // 滑窗逻辑：检测潜在车位 (空间滑窗，基于x)
-    // 窗口大小转换为采样点数 (约 window_size_m / (velocity / sample_rate))
     int window_size = static_cast<int>(std::round(params.window_size_m / (params.velocity * dt)));
     std::cout << "\n滑窗分析 (窗口大小: " << window_size << " 点, 约" << params.window_size_m << "m):" << std::endl;
     int start = 0;
@@ -82,13 +79,6 @@ int main() {
     for(int i = start;i<final;i++){
         avgdis += dis_y[i]/(final-start);
     }
-
-    if(avgdis>params.dist_threshold){
-        std::cout << "潜在车位起始于 x=" << start << " 终点 " << final << "m)" << std::endl;
-    }
-    else{
-        std::cout<<"fail"<<std::endl;
-    }
     add_box(xs[start],xs[final],dis_y[start],dis_y[final],0.2f);
     std::vector<float> pts_x;
     std::vector<float> pts_y;
@@ -98,40 +88,7 @@ int main() {
     }
     bool is_draw = 1;
     auto obstacles = rect_point_min_max(pts, params);
-
-    if (is_draw){
-        plt::figure();
-        // std::vector<float> xs, ys;
-        
-        plt::scatter(xs, ys, 10.0);         // 修复：添加颜色
-        plt::scatter(xs, dis_y, 10.0); 
-        plt::scatter(pts_x, pts_y, 10.0);
-
-        // // 画出车辆行驶轨迹
-        for (auto& o : obstacles) {
-            std::vector<float> bx = {o.x_min, o.x_max, o.x_max, o.x_min, o.x_min};
-            std::vector<float> by = {o.y_min, o.y_min, o.y_max, o.y_max, o.y_min};
-            plt::plot(bx, by, "r-");
-        }
-        
-        
-
-        // 画车位
-        // for (auto& s : slots) {
-        //     float L = s.length, W = s.width;
-        //     float x0 = s.cx - L/2, x1 = s.cx + L/2;
-        //     float y0 = s.cy - W/2, y1 = s.cy + W/2;
-        //     std::vector<float> sx = {x0, x1, x1, x0, x0};
-        //     std::vector<float> sy = {y0, y0, y1, y1, y0};
-        //     plt::plot(sx, sy, "g--");
-        // }
-        plt::axis("equal");
-        plt::grid(true);
-        plt::show();
-        // plt::imwrite("bev_output.png", bev);
-    }
-    
-
+    draw(is_draw,xs,ys,dis_y,pts_x,pts_y,obstacles);
 
     return 0;
 }

@@ -1,6 +1,8 @@
 
 #include "USS.hpp"
 #include <algorithm>
+#include "../matplotlib-cpp-master/matplotlibcpp.h"
+namespace plt = matplotlibcpp;
 
 namespace uss {
 
@@ -73,4 +75,39 @@ double ideal_distance(double x) {
     else return 0.5;  // 有车
 }
 
+
+
+void draw(bool is_draw, std::vector<double> xs, std::vector<double> ys, std::vector<float> dis_y, std::vector<float> pts_x, std::vector<float> pts_y, std::vector<Slot> obstacles){
+    if (is_draw){
+        plt::figure();
+        // std::vector<float> xs, ys;
+        
+        plt::scatter(xs, ys, 10.0);         // 修复：添加颜色
+        plt::scatter(xs, dis_y, 10.0); 
+        plt::scatter(pts_x, pts_y, 10.0);
+
+        // // 画出车辆行驶轨迹
+        for (auto& o : obstacles) {
+            std::vector<float> bx = {o.x_min, o.x_max, o.x_max, o.x_min, o.x_min};
+            std::vector<float> by = {o.y_min, o.y_min, o.y_max, o.y_max, o.y_min};
+            plt::plot(bx, by, "r-");
+        }
+        
+        
+
+        // 画车位
+        // for (auto& s : slots) {
+        //     float L = s.length, W = s.width;
+        //     float x0 = s.cx - L/2, x1 = s.cx + L/2;
+        //     float y0 = s.cy - W/2, y1 = s.cy + W/2;
+        //     std::vector<float> sx = {x0, x1, x1, x0, x0};
+        //     std::vector<float> sy = {y0, y0, y1, y1, y0};
+        //     plt::plot(sx, sy, "g--");
+        // }
+        plt::axis("equal");
+        plt::grid(true);
+        plt::show();
+        // plt::imwrite("bev_output.png", bev);
+    }
+    }
 } // namespace uss

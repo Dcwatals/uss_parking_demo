@@ -68,6 +68,7 @@ std::vector<ParkingSlot> detectSlots(const std::vector<Slot>& obs, const Params&
 // Utility: sort points by x
 void sortByX(std::vector<USSPoint>& pts);
 double ideal_distance(double x) ;
+void draw(bool is_draw, std::vector<double> xs, std::vector<double> ys, std::vector<float> dis_y, std::vector<float> pts_x, std::vector<float> pts_y, std::vector<Slot> obstacles);
 
 // Multi-frame accumulation (simple) — append new points into a rolling buffer (kept outside library)
 } // namespace uss

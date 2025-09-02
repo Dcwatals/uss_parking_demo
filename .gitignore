@@ -1,0 +1,52 @@
+# Catkin 构建系统生成的文件
+build/
+devel/
+install/
+
+# CMake 生成的文件
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+catkin_make.cache
+catkin_make_isolated.cache
+
+# ROS 日志文件
+*.log
+*.rosconsole
+
+# Python 编译文件
+__pycache__/
+*.py[cod]
+
+# 编译生成的文件
+*.so
+*.o
+*.a
+
+# 编辑器临时文件
+*~
+.*.swp
+.*swo
+
+# IDE 文件 (根据你使用的IDE选择)
+.vscode/
+.idea/
+*.project
+*.pydevproject
+*.settings/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 本地配置文件（如果有）
+local_settings.ini
+config.local.yaml
+
+# 大型数据文件/模型文件（如果有）
+*.bag
+*.pcd
+*.ply
+*.obj
+*.bin
